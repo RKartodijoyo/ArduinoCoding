@@ -1,0 +1,79 @@
+#include<LiquidCrystal_I2C.h>
+int sampling_data();//fungsi sampling data
+void selection(int h);//fungsi selsection
+LiquidCrystal_I2C lcd(0x27,2,1,0,4,5,6,7,3,POSITIVE);
+void setup(){
+lcd.begin(16x2);
+for(int i=0;i<3;i++){
+    lcd.backlight();
+    delay(250);
+    lcd.noBacklight();
+    delay(250);
+    }
+    lcd.backlight();
+//lcd backlight mati dan hidup
+}
+
+void loop()
+{
+selection(sampling_data());
+}
+
+}
+int sampling_data(){
+int j;
+for(int k=0; k<20;k++){//itereasi sebanyak 20x
+    k+=analogRead(A0);
+    delay(50);
+
+}
+
+return k/20;//setalah selesai  pertambahan iterasi dibagi 20
+}
+int selection(int h){//data dari sampling data
+lcd.clear();
+
+if(h>120&&h<125){
+lcd.setCursor(0,0);
+    lcd.print("##");//untuk mencetak 1 BAR
+lcd.setCursor(0,1);
+    lcd.print("1 BAR");
+}
+else if(h>=125&&h<130){
+lcd.setCursor(0,0);
+    lcd.print("####");//untuk mencetak 2 BAR
+lcd.setCursor(0,1);
+    lcd.print("2 BAR");
+}
+
+else if(h>=130&&h<135){
+lcd.setCursor(0,0);
+    lcd.print("######");//untuk mencetak 3 BAR
+lcd.setCursor(0,1);
+    lcd.print("3 BAR");
+}
+else if(h>=135&&h<140){
+lcd.setCursor(0,0);
+    lcd.print("########");//untuk mencetak 4 BAR
+lcd.setCursor(0,1);
+    lcd.print("4 BAR");
+}
+else if(h>=140&&h<145){
+lcd.setCursor(0,0);
+    lcd.print("##########");//untuk mencetak 5 BAR
+lcd.setCursor(0,1);
+    lcd.print("5 BAR");
+}
+else if(h>=145){
+lcd.setCursor(0,0);
+    lcd.print("BAHAYA");//untuk mencetak LEBIH dari 5 BAR
+lcd.setCursor(0,1);
+    lcd.print("BAHAYA");
+}
+else(){
+lcd.setCursor(0,1);
+    lcd.print("0 BAR");//Tidak mumpuni
+}
+delay(1000);
+
+}
