@@ -1,0 +1,57 @@
+#include<LiquidCrystal_I2C.h>
+int sampling_data();//fungsi sampling data
+void selection(int h);//fungsi selsection
+LiquidCrystal_I2C lcd(0x27,2,1,0,4,5,6,7,3,POSITIVE);
+void setup(){
+lcd.begin(16x2);
+pinMode(3,INPUT);//deklarasi sebagai pin INPUT
+for(int i=0;i<3;i++){
+    lcd.backlight();
+    delay(250);
+    lcd.noBacklight();
+    delay(250);
+    }
+    lcd.backlight();
+//lcd backlight mati dan hidup
+}
+
+void loop()
+{
+    if(digitalRead(2)==HIGH){//tekan tombol untuk memulai proses
+    selection(sampling_data());
+    lcd.seCursor(0,0);
+    lcd.print("proses")
+    delay(500);
+    lcd.clear():
+    }
+
+}
+int sampling_data(){
+int j;
+for(int k=0; k<20;k++){//itereasi sebanyak 20x
+    k+=analogRead(A0);
+    delay(50);
+
+}
+
+return k/20;//setalah selesai  pertambahan iterasi dibagi 20
+}
+int selection(int h){//data dari sampling data
+lcd.setCursor(0,0);
+if(h>120&&h<125){
+    lcd.print("Golongan Darah A");//untuk mencetak nilai A
+}
+else if(h>=125&&h<130){//untuk mencetak nilai B
+    lcd.print("Golongan Darah B");}
+
+else if(h>=125&&h<130){//untuk mencetak nilai O
+    lcd.print("Golongan Darah O");}
+
+else if(h>=125&&h<130){//untuk mencetak nilai AB
+    lcd.print("Golongan Darah AB");}
+else(){
+    lcd printf("Golongan Darah Tidak Tersedia");
+}
+delay(3000);
+lcd.clear();
+}
